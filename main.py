@@ -28,19 +28,32 @@ def robotFunc(targetPos:Point):
     MTuple = Point.toTuple(targetPos)
     # print(MArray[0])
     def f1(v:np.ndarray):#Funktion, um den Wert des Winkels zu berechnen
-        phi = np.arcsin([(v[1]-400)/AL]) #Winkel
+        phi = np.array(np.arcsin([(v[1]-400)/AL])) #Winkel
+        print("Phi: " , phi)
         return phi
     
     def f2(v:np.ndarray): #Funktion, um den Translationswert zu berechnen
-        Tx = AL*np.cos(np.arcsin([(v[1]-400)/AL]))
+        Tx = np.array(AL*np.cos(np.arcsin([(v[1]-400)/AL])))
+        print("Tx: " , Tx)
         return Tx
     
     def func(v:np.ndarray):
-        return np.array([f1(v), f2(v)])
-
-    MArray = np.array([MTuple[0], MTuple[1]]) #MTuple zu einer Array gemacht
+        Funktion = np.array([f1(v), f2(v)])
+        print("Funktion: " , Funktion)
+        print("Funktion shape: ", Funktion.shape)
+        return Funktion
+    print("f1 außerhalb: ", f1)
+    print("f2 außerhalb: ", f2)
+    print("func: ", func)
     
-    newton(MArray,func)
+    MArray = np.array([[MTuple[0]], [MTuple[1]]]) #MTuple zu einer Array gemacht
+    #print(MArray)
+    func(MArray)
+    print("MArray shape: ", MArray.shape)
+    
+    #newton(MArray,func)
+
+#aktuelles Problem: func ist immer eine Dimension weiter als MArray
 
 #--- main ---#
 app = App("My App", 800, 800)

@@ -5,14 +5,14 @@ import numpy.linalg as la
 def newton(start:np.ndarray, f:Callable[[np.ndarray], np.ndarray], min=1e-4, maxIterations=1000):
     x = start.copy()
     for iteration in range(maxIterations):
-        J = jacobi(x,f)
-        delta_x = la.solve(J, -f(x))
-        x = x + delta_x
+        J = jacobi(start,f)
+        delta_x = la.solve(J, -f(start))
+        start = start + delta_x
         if np.linalg.norm(delta_x) < min:
             print(f"Converged in {iteration + 1} iterations.")
-            return x
+            return start
     print("Did not converge.")
-    return x
+    return start
 
 def jacobi(x:np.ndarray, f:Callable[[np.ndarray], np.ndarray]) -> np.ndarray:
     rows = f(x).shape[0]
