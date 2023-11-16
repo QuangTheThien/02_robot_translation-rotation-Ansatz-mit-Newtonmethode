@@ -3,13 +3,11 @@ import numpy as np
 import numpy.linalg as la
 
 def newton(start:np.ndarray, f:Callable[[np.ndarray], np.ndarray], min=1e-4, maxIterations=1000):
-    x = start
-    Iteration = 0
+    x = start #Startvektor übergeben
     for iteration in range(maxIterations):
-        J = jacobi(x,f)
+        J = jacobi(x,f) 
         delta_x = la.solve(J, -f(x)) #hier bekommt f den x vektor
         x = x + delta_x
-        Iteration = Iteration + 1
         if np.linalg.norm(delta_x) < min:
             x = np.append(x, iteration)
             print("Konvergent: ",x)
@@ -29,12 +27,4 @@ def jacobi(x:np.ndarray, f:Callable[[np.ndarray], np.ndarray]) -> np.ndarray:
         x2[j] = x[j]+eps
         x1[j] = x[j]-eps
         J[:,j] = (f(x2) - f(x1))/(2*eps)
-    #start vektor = mauspos
     return J
-
-    
-# array1 = np.array([[1, 2],[3, 4]])
-# array2 = np.array([5,6])
-# jacobi(array1,array2)
-# test = jacobi.J
-# print(test)
