@@ -11,9 +11,11 @@ def newton(start:np.ndarray, f:Callable[[np.ndarray], np.ndarray], min=1e-4, max
         x = x + delta_x
         Iteration = Iteration + 1
         if np.linalg.norm(delta_x) < min:
-            x = np.append(x, Iteration)
+            x = np.append(x, iteration)
+            print("Konvergent: ",x)
             return x
-    x = np.append(x, Iteration)
+    x = np.append(x, iteration)
+    print("Divergent: ",x)
     return x
 
 def jacobi(x:np.ndarray, f:Callable[[np.ndarray], np.ndarray]) -> np.ndarray:

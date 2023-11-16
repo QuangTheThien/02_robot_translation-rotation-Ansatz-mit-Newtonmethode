@@ -36,11 +36,14 @@ def robotFunc(targetPos:Point):
     #print("f1 außerhalb: ", f1)
     #print("f2 außerhalb: ", f2)
     
-    StartVektor = np.array([1, 1])
+    StartVektor = np.array([10, 10])# 10 stabiler als 1
     Wert = newton(StartVektor,f)
-    print(Wert[0],Wert[1])#Wert 0 = Slider, Wert 1 = Winkel
+    #2print(Wert[0],Wert[1],Wert[2])#Wert 0 = Slider, Wert 1 = Winkel
     
-    #if Wert[2]<1000:
+    
+    if Wert[2]==999:
+        Wert = np.array([0,0])
+    
     Slider = Point(200+Wert[0],400)
     Kreis = Point(Wert[0]+AL*np.cos(Wert[1])+200,AL*np.sin(Wert[1])+400)
         
